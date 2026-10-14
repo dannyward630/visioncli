@@ -355,6 +355,9 @@ jobs:
     needs: windows-release
     if: startsWith(github.ref, 'refs/tags/v') && github.event.repository.private == false
     runs-on: windows-latest
+    # winget only takes updates once Microsoft has merged the package's first version (submitted by hand); a
+    # rejected or pending update shouldn't mark the release as failed.
+    continue-on-error: true
     env:
       WINGET_TOKEN: ${{ secrets.WINGET_TOKEN }}
     steps:
