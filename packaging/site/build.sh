@@ -24,6 +24,7 @@ cp "$here/../../docs/brand/mark.svg" "$OUT/mark.svg"
 cp "$here/privacy.html" "$OUT/privacy.html"
 
 repos=no
+dnf=no
 if [ -n "${PACKAGES_GPG_PRIVATE_KEY:-}" ]; then
   GNUPGHOME=$(mktemp -d)
   export GNUPGHOME
@@ -92,6 +93,7 @@ repo_gpgcheck=1
 gpgkey=https://$DOMAIN/public.key
 metadata_expire=6h
 EOF
+      dnf=yes
     fi
     repos=yes
   fi
@@ -103,6 +105,9 @@ fi
 sed -e "s|@VERSION@|$VERSION|g" -e "s|@TAG@|$TAG|g" -e "s|@DL@|$DL|g" "$here/index.html" > "$OUT/index.html.tmp"
 if [ "$repos" = no ]; then
   sed -i.bak '/<!-- repos -->/,/<!-- \/repos -->/d' "$OUT/index.html.tmp" && rm -f "$OUT/index.html.tmp.bak"
+fi
+if [ "$dnf" = no ]; then
+  sed -i.bak '/<!-- dnf -->/,/<!-- \/dnf -->/d' "$OUT/index.html.tmp" && rm -f "$OUT/index.html.tmp.bak"
 fi
 mv "$OUT/index.html.tmp" "$OUT/index.html"
 echo "Site for $TAG in $OUT (package repositories: $repos)"

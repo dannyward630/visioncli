@@ -184,9 +184,11 @@
       <pre>curl -fsSL https://visioncli.thethirdsourcers.com/public.key | sudo gpg --dearmor -o /usr/share/keyrings/visioncli.gpg
 echo "deb [signed-by=/usr/share/keyrings/visioncli.gpg] https://visioncli.thethirdsourcers.com stable main" | sudo tee /etc/apt/sources.list.d/visioncli.list
 sudo apt update &amp;&amp; sudo apt install visioncli-linux</pre>
+<!-- dnf -->
       <p><b>Fedora / RHEL / openSUSE</b> (dnf or zypper repository):</p>
       <pre>sudo curl -fsSL -o /etc/yum.repos.d/visioncli.repo https://visioncli.thethirdsourcers.com/visioncli.repo
 sudo dnf install visioncli-linux</pre>
+<!-- /dnf -->
 <!-- /repos -->
       <p class="note">Then start VisionCLI from your app menu; its setup wizard checks the desktop tools it needs. Details in <a href="https://github.com/thethirdsourcers/visioncli/blob/main/docs/LINUX.md">docs/LINUX.md</a>.</p>
     </div>
